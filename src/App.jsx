@@ -1,17 +1,19 @@
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Body from './Body';
+
 
 function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
-
-      <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 gap-4">
-        <h1 className="text-4xl font-bold text-primary">
-          Tailwind + daisyUI are Live!
-        </h1>
-        <button className="btn btn-accent">daisyUI Button</button>
-      </div>
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<Body />}>
+            <Route path="/login" element={"Login"} />
+            <Route path="/profile" element={"Profile"} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
