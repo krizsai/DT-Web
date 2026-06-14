@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeUser } from "./utils/userSlice";
+import { removeUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {

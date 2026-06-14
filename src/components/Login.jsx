@@ -1,13 +1,17 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addUser } from "./utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
-
+    
     const [emailId, setEmailId] = useState("maheshbabu@hotmail.com");
     const [password, setPassword] = useState("MSms19@$");
+    
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const userLogin = async () => {
         console.log("userLogin called", { emailId, password });
         try{
@@ -23,6 +27,8 @@ const Login = () => {
             );
             console.log("Result: ", result.data);
             dispatch( addUser(result.data));
+            //Lets use navigator to navigate to the home page
+            navigate("/");
         }catch(err){
             console.error("Login error:", err);
         }
