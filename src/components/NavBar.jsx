@@ -32,7 +32,7 @@ const NavBar = () => {
                 <div className="w-10 rounded-full">
                   <img
                     alt="User Photo"
-                    src="{user.photoURL}"
+                    src={user.photoURL}
                   />
                 </div>
               </div>
