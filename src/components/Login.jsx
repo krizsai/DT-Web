@@ -8,6 +8,7 @@ const Login = () => {
     
     const [emailId, setEmailId] = useState("maheshbabu@hotmail.com");
     const [password, setPassword] = useState("MSms19@$");
+    const [error, setError] = useState();
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -30,7 +31,8 @@ const Login = () => {
             //Lets use navigator to navigate to the home page
             navigate("/");
         }catch(err){
-            console.error("Login error:", err);
+          setError(err.response?.data?.error || err.response?.data || err.message || "Something Went Wrong");
+          console.log(err);
         }
     }
 
@@ -45,6 +47,7 @@ const Login = () => {
             <label htmlFor="user-password">Password</label>
             <input className="input input-bordered w-full" type="password" id="user-password" placeholder="Password" value={password}
             onChange= { (e) => setPassword(e.target.value)}/>
+            { error && <span className="text-error">{error}</span> }
             <div className="card-actions justify-center">
               <button className="btn btn-primary" onClick={userLogin}>Login</button>
             </div>
