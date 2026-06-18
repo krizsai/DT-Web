@@ -16,7 +16,7 @@ const EditProfile = ( {user} ) =>   {
     const [skills, setSkills] = useState(user.skills);
     const [photoURL, setPhotoURL] = useState(user.photoURL);
     
-    
+    const [toast, setToast] = useState(false);
     const [error, setError] = useState(""); 
 
     const saveProfile = async (e) => {
@@ -34,8 +34,13 @@ const EditProfile = ( {user} ) =>   {
                 withCredentials: true,
             });
             dispatch(addUser(response?.data?.data));
+            setToast(true);
+            setTimeout(() => {
+                setToast(false);
+            }, 5000);
             console.log(response.data);
         } catch (err) {
+            setError(err.message);
             console.error(err);
         }
     }
@@ -105,6 +110,17 @@ const EditProfile = ( {user} ) =>   {
                                 </label>
                                 <label className="form-control w-full max-w-xs my-2">
                                     <div className="label">
+                                        <span className="label-text">Skills:</span>
+                                    </div>
+                                    <input 
+                                        type="text"
+                                        value={skills}
+                                        className="input input-border w-full max-w-xs"
+                                        onChange={(e) => setSkills(e.target.value)}
+                                    />
+                                </label>
+                                <label className="form-control w-full max-w-xs my-2">
+                                    <div className="label">
                                         <span className="label-text">Photo URL:</span>
                                     </div>
                                     <input 
@@ -126,6 +142,13 @@ const EditProfile = ( {user} ) =>   {
                 </div>
                 <UserCard user={{firstName, lastName, age, gender, about, skills, photoURL}} />
             </div>
+            { toast && (
+            <div className="toast toast-top toast-center">
+                <div className="alert alert-success">
+                    <span>Profile saved successfully.</span>
+                </div>
+            </div>  
+            )}
         </>
     );
 }   
