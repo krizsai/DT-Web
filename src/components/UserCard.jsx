@@ -3,6 +3,12 @@ const UserCard = ({ user, onAction }) => {
 
   const { _id, firstName, lastName, photoURL, age, gender, about, skills } = user;
 
+  const skillsArray = Array.isArray(skills)
+    ? skills
+    : typeof skills === "string"
+    ? skills.split(",").map((s) => s.trim()).filter(Boolean)
+    : [];
+
   return (
     <div className="card card-side bg-base-100 shadow-xl max-w-2xl w-full my-4 hover:shadow-2xl transition-all duration-300">
       <figure className="w-1/3 min-w-[200px]">
@@ -26,11 +32,11 @@ const UserCard = ({ user, onAction }) => {
           {about || "No bio description provided."}
         </p>
         
-        {skills && skills.length > 0 && (
+        {skillsArray && skillsArray.length > 0 && (
           <div className="mb-4">
             <h3 className="text-sm font-semibold text-gray-400 mb-1">Skills:</h3>
             <div className="flex flex-wrap gap-1">
-              {skills.map((skill, index) => (
+              {skillsArray.map((skill, index) => (
                 <div key={index} className="badge badge-neutral text-xs">
                   {skill}
                 </div>

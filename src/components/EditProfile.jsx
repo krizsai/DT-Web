@@ -28,7 +28,7 @@ const EditProfile = ( {user} ) =>   {
                 age,
                 gender,
                 about,
-                skills,
+                skills: typeof skills === "string" ? skills.split(",").map((s) => s.trim()).filter(Boolean) : skills,
                 photoURL
             }, {
                 withCredentials: true,
