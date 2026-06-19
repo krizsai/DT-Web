@@ -86,17 +86,56 @@ const EditProfile = ( {user} ) =>   {
                                         onChange={(e) => setAge(e.target.value)}
                                     />
                                 </label>
-                                <label className="form-control w-full max-w-xs my-2">
+                                <div className="dropdown dropdown-bottom w-full max-w-xs my-2">
                                     <div className="label">
                                         <span className="label-text">Gender:</span>
                                     </div>
-                                    <input 
-                                        type="text"
-                                        value={gender}
-                                        className="input input-border w-full max-w-xs"
-                                        onChange={(e) => setGender(e.target.value)}
-                                    />
-                                </label>
+                                    <div tabIndex={0} role="button" className="input input-bordered flex items-center justify-between w-full max-w-xs bg-base-100 cursor-pointer capitalize">
+                                        {gender ? gender : "Select Gender"}
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" /></svg>
+                                    </div>
+                                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-full max-w-xs z-[1] border border-base-300">
+                                        <li>
+                                            <label className="flex items-center gap-3 cursor-pointer py-2">
+                                                <input 
+                                                    type="radio" 
+                                                    name="gender-option" 
+                                                    value="male" 
+                                                    checked={gender === "male" || gender === "Male"} 
+                                                    onChange={(e) => setGender(e.target.value.toLowerCase())}
+                                                    className="radio radio-primary radio-sm" 
+                                                />
+                                                <span>Male</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label className="flex items-center gap-3 cursor-pointer py-2">
+                                                <input 
+                                                    type="radio" 
+                                                    name="gender-option" 
+                                                    value="female" 
+                                                    checked={gender === "female" || gender === "Female"} 
+                                                    onChange={(e) => setGender(e.target.value.toLowerCase())}
+                                                    className="radio radio-primary radio-sm" 
+                                                />
+                                                <span>Female</span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <label className="flex items-center gap-3 cursor-pointer py-2">
+                                                <input 
+                                                    type="radio" 
+                                                    name="gender-option" 
+                                                    value="others" 
+                                                    checked={gender === "others" || gender === "Others" || gender === "other" || gender === "Other"} 
+                                                    onChange={(e) => setGender(e.target.value.toLowerCase())}
+                                                    className="radio radio-primary radio-sm" 
+                                                />
+                                                <span>Others</span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <label className="form-control w-full max-w-xs my-2">
                                     <div className="label">
                                         <span className="label-text">About:</span>
