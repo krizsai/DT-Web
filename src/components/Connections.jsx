@@ -33,7 +33,7 @@ const Connections = () => {
 
     return (
         <div className="flex flex-col items-center my-10 px-4">
-            <h1 className="text-3xl font-extrabold mb-8 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            <h1 className="text-2xl font-extrabold mb-8 text-center bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Your Connections
             </h1>
             
