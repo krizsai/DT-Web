@@ -10,6 +10,18 @@ const Request = () => {
     const dispatch = useDispatch();
     const requests = useSelector( store => store.requestsSlice );
 
+    const reviewRequest = async ( req_id, action) => {
+        try{
+            const res = await axios.post(`${BASE_URL}/connection/request/review/${action}/${req_id}`, {}, {withCredentials: true});
+            console.log(res);
+            if (res.status === 200) {
+                fetchRequests();
+            }
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+
     const fetchRequests = async () => {
         try{
             const res = await axios.get(`${BASE_URL}/user/requests` , {withCredentials: true});
@@ -48,7 +60,7 @@ const Request = () => {
                     {requests.map((request) => {
                         if (!request) return null;
                         const { _id, firstName, lastName, photoURL, age, gender, about } = request.fromUserId;
-                        
+                        const req_id = request._id;
                         return (
                             <div 
                                 key={_id} 
@@ -79,8 +91,8 @@ const Request = () => {
                                 </div>
                                 
                                 <div className="flex card-actions">
-                                    <button className="btn btn-success btn-sm px-4">Accept</button>
-                                    <button className="btn btn-primary btn-sm px-4">Decline</button>
+                                    <button className="btn btn-success btn-sm px-4" onClick= {() => reviewRequest(req_id, "accepted")}>Accept</button>
+                                    <button className="btn btn-primary btn-sm px-4" onClick= {() => reviewRequest(req_id, "rejected")}>Decline</button>
                                 </div>
                             </div>
                         );
